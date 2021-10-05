@@ -27,8 +27,11 @@ public class Graphics
 
 		Clear();
 	}
-
-	public void Draw(bool clear = true) // draws the screen to the console
+	
+	/// <summary>
+        /// Draws the frame to the console window.
+        /// </summary>
+	public void Draw(bool clear = true)
 	{
 		if (clear) Console.Clear();
 
@@ -54,7 +57,10 @@ public class Graphics
 
 		Clear();
 	}
-
+	
+	/// <summary>
+        /// Iterates over the current frame, returning the current x, y, character, and color of the given position. Use this if you want to do special filtering while drawing.
+        /// </summary>
 	public IEnumerable<(int x, int y, char character, ConsoleColor color)> CustomDraw(bool draw)
 	{
 		Console.ForegroundColor = colors[0][0];
@@ -83,7 +89,10 @@ public class Graphics
 
 		Clear();
 	}
-
+	
+	/// <summary>
+        /// Clears the frame.
+        /// </summary>
 	private void Clear()
 	{	
 		for (int y = 0; y < height; y++)
@@ -98,7 +107,10 @@ public class Graphics
 			display[y * width * 2 + (width * 2) - 1] = '\n';
 		}		
 	}
-
+	
+	/// <summary>
+        /// Sets the character in the frame at (x, y) to c with the given color.
+        /// </summary>
 	public void SetChar(int x, int y, char c, ConsoleColor color = ConsoleColor.White) // change a single character & color on the screen
 	{
 		if (x < 0 || x >= width || y < 0 || y >= height) return;
@@ -107,6 +119,9 @@ public class Graphics
 		colors[y][x] = color;
 	}
 
+	/// <summary>
+        /// Adds rectangular arrays of characters and colors anchored at (x, y) to the frame.
+        /// </summary>
 	public void SetMultiple(int x, int y, char[,] charArray, ConsoleColor[,] colorArray) // change multiple characters / colors on the screen. must be rectangular
 	{
 		for (int i = 0; i < charArray.Length; i++)
@@ -118,6 +133,9 @@ public class Graphics
 		}
 	}
 
+	/// <summary>
+        /// Adds a rectangular array of characters anchored at (x, y) to the frame, which each character being of the given color.
+        /// </summary>
 	public void SetMultiple(int x, int y, char[,] charArray, ConsoleColor color = ConsoleColor.White)
 	{
 		for (int i = 0; i < charArray.Length; i++)
@@ -128,7 +146,11 @@ public class Graphics
 			}
 		}
 	}
-
+	
+	/// <summary>
+        /// Adds a string with a rectangular array colors anchored at (x, y) to the frame.
+	/// new line ('\n') characters in the string will be taken as instruction to move to the next row of the frame.
+        /// </summary>
 	public void SetMultiple(int x, int y, string s, ConsoleColor[] colorArray)
 	{
 		int w = 0, v = 0;
@@ -147,6 +169,10 @@ public class Graphics
 		}
 	}
 
+	/// <summary>
+        /// Adds a string of characters anchored at (x, y) to the frame, which each character being of the given color.
+	/// new line ('\n') characters in the string will be taken as instruction to move to the next row of the frame.
+        /// </summary>
 	public void SetMultiple(int x, int y, string s, ConsoleColor color = ConsoleColor.White)
 	{
 		int w = 0, v = 0;
@@ -164,15 +190,24 @@ public class Graphics
 			}
 		}
 	}
-
+	
+	/// <summary>
+        /// Draws a Sprite to the frame.
+        /// </summary>
 	public void SetMultiple(int x, int y, Sprite sprite) => SetMultiple(x, y, sprite.display, sprite.colorArray);
 
+	/// <summary>
+        /// Sets the entire frame.
+        /// </summary>
 	public void Set(char[] display, ConsoleColor[][] colors)
 	{
 		this.display = display;
 		this.colors = colors;
 	}
-
+	
+	/// <summary>
+        /// Sets the entire frame, given a 2D character array and an optional color array.
+        /// </summary>
 	public void Set(char[,] displayArray, ConsoleColor[,] colorArray = null)
 	{
 		bool isColor = colorArray != null;
@@ -193,6 +228,9 @@ public class Graphics
 		}
 	}
 
+	/// <summary>
+        /// Adds text of the (optional) given color to the frame. Text will wrap across rows and truncate at the end of the screen.
+        /// </summary>
 	public void SetText(int x, int y, string text, ConsoleColor color = ConsoleColor.White)
 	{
 		if (x < 0 || x >= width || y < 0 || y >= height) return;
@@ -217,8 +255,11 @@ public class Graphics
 			}
 		}
 	}
-
-	public struct Sprite // stores characters and colors, can be drawn with SetMultiple(int, int, Sprite)
+	
+	/// <summary>
+        /// stores characters and colors, can be drawn with SetMultiple(int, int, Sprite)
+        /// </summary>
+	public struct Sprite
 	{
 		public string display;
 		public ConsoleColor[] colorArray;
