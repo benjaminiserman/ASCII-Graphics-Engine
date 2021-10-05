@@ -17,7 +17,7 @@ public class MainClass
 
 	int width = 30, height = 20;
 	
-    Graphics g = new Graphics(width, height, '.', ConsoleColor.Black); // makes a new graphics screen with width 10, length 10, '.' as the empty character, and black as the default color. (IMPORTANT)
+    	Graphics g = new Graphics(width, height, '.', ConsoleColor.Black); // makes a new graphics screen with width 10, length 10, '.' as the empty character, and black as the default color. (IMPORTANT)
 
 	char[,] ballCharacters = new char[,] // what characters are the ball out made of? These can be any unicode characters, but you want to choose characters of the same width as those of this font.
 	{
